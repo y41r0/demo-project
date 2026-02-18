@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LendVista — Smart lending powered by data. Get your personalized credit score and loan offer in minutes.">
+    <title>LendVista | Smart Lending Platform</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+</head>
+<body>
+    <!-- Background animated particles -->
+    <div class="bg-particles" id="bgParticles"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <svg class="nav-logo" viewBox="0 0 32 32" fill="none">
+                <circle cx="16" cy="16" r="14" stroke="url(#logoGrad)" stroke-width="2.5"/>
+                <path d="M10 20 L16 10 L22 20" stroke="url(#logoGrad)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <defs>
+                    <linearGradient id="logoGrad" x1="0" y1="0" x2="32" y2="32">
+                        <stop offset="0%" stop-color="#6366f1"/>
+                        <stop offset="100%" stop-color="#a855f7"/>
+                    </linearGradient>
+                </defs>
+            </svg>
+            <span class="nav-name">LendVista</span>
+        </div>
+        <div class="nav-progress" id="navProgress">
+            <div class="progress-track">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <span class="progress-label" id="progressLabel">Step 1 of 4</span>
+        </div>
+    </nav>
+
+    <!-- ==================== STEP 1: LANDING ==================== -->
+    <section class="step active" id="step-landing" data-step="0">
+        <div class="landing-container">
+            <div class="hero-badge">
+                <span class="badge-dot"></span>
+                AI-Powered Credit Assessment
+            </div>
+            <h1 class="hero-title">
+                Your Future,<br>
+                <span class="gradient-text">Funded Intelligently.</span>
+            </h1>
+            <p class="hero-subtitle">
+                Get a personalized credit score and loan offer in under 3 minutes. 
+                Our smart algorithm analyzes multiple data points to give you the best possible rate.
+            </p>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-value">$2.4B+</span>
+                    <span class="stat-label">Loans Funded</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value">98.7%</span>
+                    <span class="stat-label">Satisfaction</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value">< 3 min</span>
+                    <span class="stat-label">Assessment</span>
+                </div>
+            </div>
+            <button class="btn btn-primary btn-hero" id="btnGetStarted">
+                <span>Get Your Score</span>
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+            <p class="hero-disclaimer">No impact on your credit score • 100% secure • Free assessment</p>
+
+            <div class="hero-visual">
+                <div class="floating-card card-1">
+                    <div class="fc-icon">📊</div>
+                    <div class="fc-text">Score: <strong>742</strong></div>
+                </div>
+                <div class="floating-card card-2">
+                    <div class="fc-icon">✅</div>
+                    <div class="fc-text">Pre-approved</div>
+                </div>
+                <div class="floating-card card-3">
+                    <div class="fc-icon">💰</div>
+                    <div class="fc-text">$35,000</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== STEP 2: PERSONAL INFO ==================== -->
+    <section class="step" id="step-personal" data-step="1">
+        <div class="form-container">
+            <div class="step-header">
+                <div class="step-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12Z" stroke="currentColor" stroke-width="1.5"/>
+                        <path d="M20 21C20 17.134 16.4183 14 12 14C7.58172 14 4 17.134 4 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <h2 class="step-title">Tell us about yourself</h2>
+                <p class="step-desc">We need some basic information to personalize your assessment.</p>
+            </div>
+
+            <form class="form-grid" id="formPersonal" novalidate>
+                <div class="form-group">
+                    <label class="form-label" for="fullName">Full Name</label>
+                    <input class="form-input" type="text" id="fullName" name="fullName" placeholder="John Doe" required autocomplete="name">
+                    <span class="form-error" id="fullNameError">Please enter your full name</span>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="age">Age</label>
+                        <input class="form-input" type="number" id="age" name="age" placeholder="30" min="18" max="100" required>
+                        <span class="form-error" id="ageError">Enter a valid age (18-100)</span>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="phone">Phone Number</label>
+                        <input class="form-input" type="tel" id="phone" name="phone" placeholder="+1 (555) 123-4567" required>
+                        <span class="form-error" id="phoneError">Enter a valid phone number</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="email">Email Address</label>
+                    <input class="form-input" type="email" id="email" name="email" placeholder="john@example.com" required autocomplete="email">
+                    <span class="form-error" id="emailError">Enter a valid email address</span>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="employment">Employment Status</label>
+                        <div class="select-wrapper">
+                            <select class="form-input form-select" id="employment" name="employment" required>
+                                <option value="" disabled selected>Select status</option>
+                                <option value="full-time">Full-time employed</option>
+                                <option value="part-time">Part-time employed</option>
+                                <option value="self-employed">Self-employed</option>
+                                <option value="freelancer">Freelancer</option>
+                                <option value="unemployed">Unemployed</option>
+                                <option value="retired">Retired</option>
+                                <option value="student">Student</option>
+                            </select>
+                        </div>
+                        <span class="form-error" id="employmentError">Select your employment status</span>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="education">Education Level</label>
+                        <div class="select-wrapper">
+                            <select class="form-input form-select" id="education" name="education" required>
+                                <option value="" disabled selected>Select level</option>
+                                <option value="high-school">High School</option>
+                                <option value="associate">Associate's Degree</option>
+                                <option value="bachelor">Bachelor's Degree</option>
+                                <option value="master">Master's Degree</option>
+                                <option value="doctorate">Doctorate / PhD</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <span class="form-error" id="educationError">Select your education level</span>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn-ghost" id="btnBackToLanding">
+                        <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M16 10H4M4 10L9 5M4 10L9 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        Back
+                    </button>
+                    <button type="submit" class="btn btn-primary" id="btnToFinancial">
+                        Continue
+                        <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- ==================== STEP 3: FINANCIAL INFO ==================== -->
+    <section class="step" id="step-financial" data-step="2">
+        <div class="form-container">
+            <div class="step-header">
+                <div class="step-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                        <rect x="2" y="6" width="20" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                        <path d="M2 10H22" stroke="currentColor" stroke-width="1.5"/>
+                        <path d="M6 14H10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <h2 class="step-title">Financial overview</h2>
+                <p class="step-desc">Help us understand your financial situation to provide the best assessment.</p>
+            </div>
+
+            <form class="form-grid" id="formFinancial" novalidate>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="income">Monthly Income (USD)</label>
+                        <div class="input-icon-wrapper">
+                            <span class="input-icon">$</span>
+                            <input class="form-input input-with-icon" type="number" id="income" name="income" placeholder="5,000" min="0" required>
+                        </div>
+                        <span class="form-error" id="incomeError">Enter your monthly income</span>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="expenses">Monthly Expenses (USD)</label>
+                        <div class="input-icon-wrapper">
+                            <span class="input-icon">$</span>
+                            <input class="form-input input-with-icon" type="number" id="expenses" name="expenses" placeholder="3,000" min="0" required>
+                        </div>
+                        <span class="form-error" id="expensesError">Enter your monthly expenses</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="existingDebt">Total Existing Debt (USD)</label>
+                    <div class="input-icon-wrapper">
+                        <span class="input-icon">$</span>
+                        <input class="form-input input-with-icon" type="number" id="existingDebt" name="existingDebt" placeholder="10,000" min="0" required>
+                    </div>
+                    <span class="form-error" id="existingDebtError">Enter your total existing debt</span>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">How would you rate your credit history?</label>
+                    <div class="radio-grid" id="creditHistory">
+                        <label class="radio-card">
+                            <input type="radio" name="creditHistory" value="excellent">
+                            <div class="radio-card-inner">
+                                <span class="radio-emoji">🌟</span>
+                                <span class="radio-label">Excellent</span>
+                                <span class="radio-desc">No missed payments</span>
+                            </div>
+                        </label>
+                        <label class="radio-card">
+                            <input type="radio" name="creditHistory" value="good">
+                            <div class="radio-card-inner">
+                                <span class="radio-emoji">👍</span>
+                                <span class="radio-label">Good</span>
+                                <span class="radio-desc">Rarely miss payments</span>
+                            </div>
+                        </label>
+                        <label class="radio-card">
+                            <input type="radio" name="creditHistory" value="fair">
+                            <div class="radio-card-inner">
+                                <span class="radio-emoji">📊</span>
+                                <span class="radio-label">Fair</span>
+                                <span class="radio-desc">Some late payments</span>
+                            </div>
+                        </label>
+                        <label class="radio-card">
+                            <input type="radio" name="creditHistory" value="poor">
+                            <div class="radio-card-inner">
+                                <span class="radio-emoji">⚠️</span>
+                                <span class="radio-label">Poor</span>
+                                <span class="radio-desc">Frequent issues</span>
+                            </div>
+                        </label>
+                        <label class="radio-card">
+                            <input type="radio" name="creditHistory" value="none">
+                            <div class="radio-card-inner">
+                                <span class="radio-emoji">🆕</span>
+                                <span class="radio-label">No History</span>
+                                <span class="radio-desc">First-time borrower</span>
+                            </div>
+                        </label>
+                    </div>
+                    <span class="form-error" id="creditHistoryError">Please select your credit history</span>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="loanPurpose">Purpose of Loan</label>
+                    <div class="select-wrapper">
+                        <select class="form-input form-select" id="loanPurpose" name="loanPurpose" required>
+                            <option value="" disabled selected>Select purpose</option>
+                            <option value="home">Home Purchase / Renovation</option>
+                            <option value="auto">Auto / Vehicle</option>
+                            <option value="education">Education</option>
+                            <option value="business">Business / Startup</option>
+                            <option value="debt-consolidation">Debt Consolidation</option>
+                            <option value="medical">Medical Expenses</option>
+                            <option value="personal">Personal / Other</option>
+                        </select>
+                    </div>
+                    <span class="form-error" id="loanPurposeError">Select the purpose of your loan</span>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn-ghost" id="btnBackToPersonal">
+                        <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M16 10H4M4 10L9 5M4 10L9 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        Back
+                    </button>
+                    <button type="submit" class="btn btn-primary" id="btnAnalyze">
+                        Analyze My Profile
+                        <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- ==================== STEP 4: DOCUMENT UPLOAD ==================== -->
+    <section class="step" id="step-documents" data-step="3">
+        <div class="form-container upload-container">
+            <div class="step-header">
+                <div class="step-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                        <path d="M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V8L14 2Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M14 2V8H20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M12 18V12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M9 15L12 12L15 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <h2 class="step-title">Verify your identity</h2>
+                <p class="step-desc">Upload your documents so we can validate your information and provide a more accurate assessment.</p>
+            </div>
+
+            <div class="upload-grid">
+                <!-- Government ID Upload -->
+                <div class="upload-zone" id="uploadZoneId" tabindex="0">
+                    <input type="file" id="fileInputId" class="upload-file-input" accept="image/*,.pdf" />
+                    <div class="upload-zone-content" id="uploadContentId">
+                        <div class="upload-icon-wrapper">
+                            <svg class="upload-icon" width="40" height="40" viewBox="0 0 24 24" fill="none">
+                                <rect x="3" y="4" width="18" height="16" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                                <circle cx="9" cy="11" r="2" stroke="currentColor" stroke-width="1.5"/>
+                                <path d="M15 9H17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                <path d="M15 12H17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                <path d="M7 16H17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <span class="upload-label">Government-Issued ID</span>
+                        <span class="upload-hint">Drag & drop or <strong>click to browse</strong></span>
+                        <span class="upload-formats">Passport, Driver's License, National ID</span>
+                        <span class="upload-formats">PDF, JPG, PNG — Max 10MB</span>
+                    </div>
+                    <div class="upload-file-info" id="fileInfoId" style="display:none;">
+                        <div class="file-info-header">
+                            <div class="file-info-icon">📄</div>
+                            <div class="file-info-details">
+                                <span class="file-info-name" id="fileNameId"></span>
+                                <span class="file-info-size" id="fileSizeId"></span>
+                            </div>
+                            <button type="button" class="upload-remove-btn" id="removeFileId" title="Remove file">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                            </button>
+                        </div>
+                        <div class="upload-validation" id="validationId">
+                            <span class="validation-badge success"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Verified</span>
+                            <span class="validation-tag" id="fileTypeTagId"></span>
+                            <span class="validation-tag" id="fileSizeTagId"></span>
+                        </div>
+                    </div>
+                    <span class="upload-error" id="uploadErrorId"></span>
+                </div>
+
+                <!-- Income Statement Upload -->
+                <div class="upload-zone" id="uploadZoneIncome" tabindex="0">
+                    <input type="file" id="fileInputIncome" class="upload-file-input" accept=".pdf,.jpg,.jpeg,.png" />
+                    <div class="upload-zone-content" id="uploadContentIncome">
+                        <div class="upload-icon-wrapper">
+                            <svg class="upload-icon" width="40" height="40" viewBox="0 0 24 24" fill="none">
+                                <path d="M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V8L14 2Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M14 2V8H20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M8 13H16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                <path d="M8 17H12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <span class="upload-label">Income Statement</span>
+                        <span class="upload-hint">Drag & drop or <strong>click to browse</strong></span>
+                        <span class="upload-formats">Pay Stub, Tax Return, Bank Statement</span>
+                        <span class="upload-formats">PDF, JPG, PNG — Max 10MB</span>
+                    </div>
+                    <div class="upload-file-info" id="fileInfoIncome" style="display:none;">
+                        <div class="file-info-header">
+                            <div class="file-info-icon">📄</div>
+                            <div class="file-info-details">
+                                <span class="file-info-name" id="fileNameIncome"></span>
+                                <span class="file-info-size" id="fileSizeIncome"></span>
+                            </div>
+                            <button type="button" class="upload-remove-btn" id="removeFileIncome" title="Remove file">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                            </button>
+                        </div>
+                        <div class="upload-validation" id="validationIncome">
+                            <span class="validation-badge success"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Verified</span>
+                            <span class="validation-tag" id="fileTypeTagIncome"></span>
+                            <span class="validation-tag" id="fileSizeTagIncome"></span>
+                        </div>
+                    </div>
+                    <span class="upload-error" id="uploadErrorIncome"></span>
+                </div>
+            </div>
+
+            <div class="upload-security-note">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 22C12 22 20 18 20 12V5L12 2L4 5V12C4 18 12 22 12 22Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Your documents are encrypted and processed securely. Files are never stored permanently.
+            </div>
+
+            <div class="form-actions">
+                <button type="button" class="btn btn-ghost" id="btnBackToFinancial">
+                    <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M16 10H4M4 10L9 5M4 10L9 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    Back
+                </button>
+                <button type="button" class="btn btn-primary" id="btnToProcessing" disabled>
+                    Verify & Analyze
+                    <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== STEP 5: PROCESSING ==================== -->
+    <section class="step" id="step-processing" data-step="4">
+        <div class="processing-container">
+            <div class="processing-spinner">
+                <svg class="spinner-svg" viewBox="0 0 120 120">
+                    <circle class="spinner-track" cx="60" cy="60" r="54"/>
+                    <circle class="spinner-fill" cx="60" cy="60" r="54"/>
+                </svg>
+                <div class="spinner-icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                        <path d="M9.5 2C5.36 2 2 5.36 2 9.5C2 13.64 5.36 17 9.5 17C13.64 17 17 13.64 17 9.5C17 5.36 13.64 2 9.5 2Z" stroke="currentColor" stroke-width="1.5"/>
+                        <path d="M15 15L22 22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                </div>
+            </div>
+            <h2 class="processing-title">Analyzing your profile</h2>
+            <div class="processing-steps">
+                <div class="proc-step" id="proc1">
+                    <div class="proc-dot"></div>
+                    <span>Verifying personal information...</span>
+                </div>
+                <div class="proc-step" id="proc2">
+                    <div class="proc-dot"></div>
+                    <span>Analyzing financial data...</span>
+                </div>
+                <div class="proc-step" id="proc3">
+                    <div class="proc-dot"></div>
+                    <span>Evaluating digital footprint...</span>
+                </div>
+                <div class="proc-step" id="proc4">
+                    <div class="proc-dot"></div>
+                    <span>Calculating credit score...</span>
+                </div>
+                <div class="proc-step" id="proc5">
+                    <div class="proc-dot"></div>
+                    <span>Verifying uploaded documents...</span>
+                </div>
+                <div class="proc-step" id="proc6">
+                    <div class="proc-dot"></div>
+                    <span>Preparing your loan offer...</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== STEP 5: RESULTS ==================== -->
+    <section class="step" id="step-results" data-step="5">
+        <div class="results-container">
+            <div class="results-header">
+                <div class="confetti" id="confetti"></div>
+                <h2 class="results-title">Your Credit Assessment</h2>
+                <p class="results-subtitle">Based on our comprehensive analysis, here are your results.</p>
+            </div>
+
+            <div class="results-grid">
+                <!-- Score Gauge -->
+                <div class="result-card result-card-score">
+                    <h3 class="card-title">Credit Score</h3>
+                    <div class="gauge-container" id="gaugeContainer">
+                        <svg class="gauge-svg" viewBox="0 0 200 130">
+                            <defs>
+                                <linearGradient id="gaugeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" stop-color="#ef4444"/>
+                                    <stop offset="25%" stop-color="#f97316"/>
+                                    <stop offset="50%" stop-color="#eab308"/>
+                                    <stop offset="75%" stop-color="#22c55e"/>
+                                    <stop offset="100%" stop-color="#10b981"/>
+                                </linearGradient>
+                            </defs>
+                            <path class="gauge-bg" d="M20 110 A80 80 0 0 1 180 110" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="12" stroke-linecap="round"/>
+                            <path class="gauge-fill" id="gaugeFill" d="M20 110 A80 80 0 0 1 180 110" fill="none" stroke="url(#gaugeGrad)" stroke-width="12" stroke-linecap="round" stroke-dasharray="251.2" stroke-dashoffset="251.2"/>
+                            <text class="gauge-score" id="gaugeScore" x="100" y="90" text-anchor="middle" fill="white" font-size="36" font-weight="800">0</text>
+                            <text class="gauge-label" x="100" y="108" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="10">out of 850</text>
+                            <text x="18" y="125" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-size="8">300</text>
+                            <text x="182" y="125" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-size="8">850</text>
+                        </svg>
+                    </div>
+                    <div class="score-rating" id="scoreRating">—</div>
+                </div>
+
+                <!-- Loan Offer -->
+                <div class="result-card result-card-offer">
+                    <h3 class="card-title">Loan Pre-Approval</h3>
+                    <div class="offer-amount">
+                        <span class="offer-currency">$</span>
+                        <span class="offer-value" id="offerAmount">0</span>
+                    </div>
+                    <p class="offer-label">Maximum loan amount</p>
+                    <div class="offer-details">
+                        <div class="offer-detail">
+                            <span class="detail-label">Est. APR</span>
+                            <span class="detail-value" id="offerAPR">—</span>
+                        </div>
+                        <div class="offer-detail">
+                            <span class="detail-label">Term</span>
+                            <span class="detail-value" id="offerTerm">—</span>
+                        </div>
+                        <div class="offer-detail">
+                            <span class="detail-label">Monthly</span>
+                            <span class="detail-value" id="offerMonthly">—</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Breakdown -->
+            <div class="result-card result-card-breakdown">
+                <h3 class="card-title">Score Breakdown</h3>
+                <div class="breakdown-grid" id="breakdownGrid">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+            <!-- Extracted Document Data -->
+            <div class="result-card result-card-documents" id="documentDataCard" style="display:none;">
+                <h3 class="card-title">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V8L14 2Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 2V8H20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    Extracted Document Data
+                </h3>
+                <div class="doc-data-grid" id="docDataGrid">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+            <!-- Metadata card -->
+            <div class="result-card result-card-meta">
+                <h3 class="card-title">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 16V12M12 8H12.01M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                    Data Points Analyzed
+                </h3>
+                <div class="meta-tags" id="metaTags">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+            <div class="results-actions">
+                <button class="btn btn-primary btn-lg" id="btnApplyNow">
+                    Apply Now
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                <button class="btn btn-ghost" id="btnStartOver">Start Over</button>
+            </div>
+            <p class="results-disclaimer">This is a pre-approval estimate. Final terms subject to verification. Assessment valid for 30 days.</p>
+        </div>
+    </section>
+
+    <script src="app.js"></script>
+</body>
+</html>
